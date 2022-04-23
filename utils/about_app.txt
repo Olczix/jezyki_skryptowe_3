@@ -1,0 +1,12 @@
+Poniższa aplikacja jest aplikacją pogodową pokazującą prognozę pogody dla podanego miasta.
+Domyślnym miastem jest Gdańsk, lecz może to zostać zmienione w zakładce "Zmień miasto".
+
+Aplikacja korzysta z danych pogodowych udostępnianych przez serwis OpenWeatherMap. Jest to
+otwarte API oferujące dostęp do danych o pogodzie. Aby uzyskać pogodę w danym miejscu trzeba
+wykorzystać dane geolokacyjne miasta (czyli długość oraz szerokość geograficzną), które z kolei
+pobierane są na podstawie nazw miasta z innego API również udostępnianego przez OpenWeatherMap.
+
+API pogodowe: https://openweathermap.org/api.
+API geolokacyjne: https://openweathermap.org/api/geocoding-api.
+
+Autorem aplikacji Aleksandra Barska.
