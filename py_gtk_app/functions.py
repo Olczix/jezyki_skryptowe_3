@@ -60,7 +60,7 @@ def info_dialog(self, message):
         transient_for=self, flags=0,
         message_type=Gtk.MessageType.INFO,
         buttons=Gtk.ButtonsType.OK,
-        text="INFO",
+        text="INFORMACJA",
     )
     dialog.format_secondary_text(message)
     dialog.run()
@@ -71,7 +71,7 @@ def error_dialog(self, message):
         transient_for=self, flags=0,
         message_type=Gtk.MessageType.ERROR,
         buttons=Gtk.ButtonsType.CANCEL,
-        text="ERROR",
+        text="BŁĄD",
     )
     dialog.format_secondary_text(message)
     dialog.run()

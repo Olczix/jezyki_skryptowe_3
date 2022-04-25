@@ -25,10 +25,10 @@ class ChangeCity(Gtk.Widget):
     
     def change_city(self, _):
         try:
-            r = get_city_geo_location()
-            write_to_file(self.city_input.text())
+            r = get_city_geo_location(self.city_input.get_text())
+            write_to_file(self.city_input.get_text())
             info_dialog(self.parent, f"Aktualne miasto to {read_file().upper()}.")
             self.city_input.set_text('')
-        except KeyError:
+        except IndexError:
             error_dialog(self.parent, "Podane miasto nie jest poprawne.\nNowe miasto nie zostało zapisane do pliku.")
             self.city_input.set_text('')

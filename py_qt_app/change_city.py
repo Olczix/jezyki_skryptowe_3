@@ -26,10 +26,10 @@ class ChangeCity(QWidget):
 
     def change_city(self):
         try:
-            r = get_city_geo_location()
+            r = get_city_geo_location(self.city_input.text())
             write_to_file(self.city_input.text())
             info_box(f"Aktualne miasto to {read_file().upper()}.")
             self.city_input.clear()
-        except KeyError:
+        except IndexError:
             error_box("Podane miasto nie jest poprawne.\nNowe miasto nie zostało zapisane do pliku.")
             self.city_input.clear()
