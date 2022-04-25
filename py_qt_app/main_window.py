@@ -69,7 +69,7 @@ def start_app():
     app.setApplicationName('Prognoza pogody')
 
     main = MyWindow()
-    main.resize(650, 550)
+    main.setFixedSize(650, 550)
     main.show()
 
     sys.exit(app.exec_())

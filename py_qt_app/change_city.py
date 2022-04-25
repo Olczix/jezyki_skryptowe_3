@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QFormLayout, QLineEdit, \
     QPushButton, QLabel
 from utils.helpers import write_to_file, read_file
-from py_qt_app.functions import info_box
+from py_qt_app.functions import info_box, error_box
+from api.geo import get_city_geo_location
 
 
 class ChangeCity(QWidget):
@@ -24,6 +25,11 @@ class ChangeCity(QWidget):
         self.setLayout(self.layout)
 
     def change_city(self):
-        write_to_file(self.city_input.text())
-        info_box(f"Aktualne miasto to {read_file().upper()}.")
-        self.city_input.clear()
+        try:
+            r = get_city_geo_location()
+            write_to_file(self.city_input.text())
+            info_box(f"Aktualne miasto to {read_file().upper()}.")
+            self.city_input.clear()
+        except KeyError:
+            error_box("Podane miasto nie jest poprawne.\nNowe miasto nie zostało zapisane do pliku.")
+            self.city_input.clear()

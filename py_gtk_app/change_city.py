@@ -2,7 +2,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from utils.helpers import write_to_file, read_file
-from py_gtk_app.functions import info_dialog
+from py_gtk_app.functions import info_dialog, error_dialog
+from api.geo import get_city_geo_location
 
 
 class ChangeCity(Gtk.Widget):
@@ -23,6 +24,11 @@ class ChangeCity(Gtk.Widget):
         self.grid.attach(self.btn, 0, 2, 1, 1)
     
     def change_city(self, _):
-        write_to_file(self.city_input.get_text())
-        info_dialog(self.parent, f"Aktualne miasto to {read_file().upper()}.")
-        self.city_input.set_text('')
+        try:
+            r = get_city_geo_location()
+            write_to_file(self.city_input.text())
+            info_dialog(self.parent, f"Aktualne miasto to {read_file().upper()}.")
+            self.city_input.set_text('')
+        except KeyError:
+            error_dialog(self.parent, "Podane miasto nie jest poprawne.\nNowe miasto nie zostało zapisane do pliku.")
+            self.city_input.set_text('')
