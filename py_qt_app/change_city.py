@@ -11,8 +11,8 @@ class ChangeCity(QWidget):
         self.resize(270, 110)
 
         self.layout = QFormLayout()
-        infoLabel = QLabel("Podaj nazwę miasta, dla którego chcesz zobaczyć prognozę pogody:")
-        self.layout.addRow(infoLabel)
+        label = QLabel("Podaj nazwę miasta, dla którego chcesz zobaczyć prognozę pogody:")
+        self.layout.addRow(label)
 
         self.city_input = QLineEdit()
         self.layout.addRow(self.city_input)
@@ -24,7 +24,6 @@ class ChangeCity(QWidget):
         self.setLayout(self.layout)
 
     def change_city(self):
-        print(self.city_input.text())
         write_to_file(self.city_input.text())
         info_box(f"Aktualne miasto to {read_file().upper()}.")
         self.city_input.clear()

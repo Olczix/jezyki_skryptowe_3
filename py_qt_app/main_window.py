@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QHBoxLayout, \
-    QStackedLayout, QPushButton, QLabel, QWidget, QApplication
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, \
+    QStackedLayout, QLabel, QWidget, QApplication, QMenuBar, QAction
 from py_qt_app.change_city import ChangeCity
 from py_qt_app.hourly_weather import HourlyWeather
 from py_qt_app.current_weather import CurrentWeather
@@ -11,33 +11,39 @@ class MyWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)
 
-        self.setWindowTitle("Aplikacja pogodowa")
+        self.setWindowTitle("Prognoza pogody")
         pagelayout = QVBoxLayout()
-        button_layout = QHBoxLayout()
         self.stacklayout = QStackedLayout()
-        pagelayout.addLayout(button_layout)
+
+        # Definicja menu
+        menu_bar = QMenuBar()
+        pagelayout.addWidget(menu_bar)
+        
+        # Pierwszy przycisk menu - wysuwany
+        weather = menu_bar.addMenu("Pogoda")
+        action_current_weather = QAction("Aktualna pogoda", self)
+        weather.addAction(action_current_weather)
+        action_current_weather.triggered.connect(self.show_current_weather)
+        action_hourly_weather = QAction("Pogoda na 24h", self)
+        weather.addAction(action_hourly_weather)
+        action_hourly_weather.triggered.connect(self.show_hourly_weather)
+
+        # Drugi przycisk menu
+        action_change_city = QAction("Zmień nazwę miasta", self)
+        menu_bar.addAction(action_change_city)
+        action_change_city.triggered.connect(self.show_city_input)
+
+        # Trzeci przycisk menu
+        action_about_app = QAction("O aplikacji", self)
+        menu_bar.addAction(action_about_app)
+        action_about_app.triggered.connect(self.show_author_info)
+
+        # Dodanie wszystkich widoków do layout'u
         pagelayout.addLayout(self.stacklayout)
-
-        btn = QPushButton("Aktualna pogoda")
-        btn.pressed.connect(self.show_current_weather)
-        button_layout.addWidget(btn)
         self.stacklayout.addWidget(CurrentWeather())
-
-        btn = QPushButton("Pogoda na 24h")
-        btn.pressed.connect(self.show_hourly_weather)
-        button_layout.addWidget(btn)
         self.stacklayout.addWidget(HourlyWeather())
-
-        btn = QPushButton("Zmień miasto")
-        btn.pressed.connect(self.show_city_input)
-        button_layout.addWidget(btn)
         self.stacklayout.addWidget(ChangeCity())
-
-        btn = QPushButton("O autorze")
-        btn.pressed.connect(self.show_author_info)
-        button_layout.addWidget(btn)
         self.stacklayout.addWidget(QLabel(read_app_description()))
-
         widget = QWidget()
         widget.setLayout(pagelayout)
         self.setCentralWidget(widget)
