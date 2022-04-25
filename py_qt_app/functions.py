@@ -7,6 +7,7 @@ from api.weather import get_weather_by_city_name, get_hourly_weather_by_city_nam
 def info_box(msg: str) -> None:
     mbox = QMessageBox()
     mbox.setText(msg)
+    mbox.setWindowTitle("INFO")
     mbox.setStandardButtons(QMessageBox.Ok)
     mbox.exec_()
 
@@ -14,7 +15,7 @@ def info_box(msg: str) -> None:
 def error_box(msg: str) -> None:
     mbox = QMessageBox()
     mbox.setText(msg)
-    mbox.setStandardButtons(QMessageBox.Ok)
+    mbox.setWindowTitle("ERROR")
     mbox.exec_()
 
 

@@ -18,7 +18,7 @@ class MyCanvas(FigureCanvas):
         y = [float(obj.temp) for obj in get_hourly_weather_list()[2:26]]
         self.ax.bar(x, y)
         for i in range(len(x)):
-            plt.text(i, y[i] + 0.05, round(y[i], 1), ha='center', fontsize=7)
+            plt.text(i, y[i] + 0.05, round(y[i], 1), ha='center', fontsize=6)
         self.ax.set_ylim(min(y) - 1, max(y) + 1)
         self.ax.set(xlabel="Godziny", ylabel="Temperatura [\u00b0C]")
         self.ax.set(title=f"Temperatura godzinowa dla miasta {read_file().upper()}")

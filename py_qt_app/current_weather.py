@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QFormLayout, QLabel
 from py_qt_app.functions import get_current_weather_obj
 from utils.helpers import read_file
+from PyQt5.QtCore import Qt
 
 
 class CurrentWeather(QWidget):
@@ -10,8 +11,10 @@ class CurrentWeather(QWidget):
         self.resize(270, 110)
 
         self.layout = QFormLayout()
+        self.layout.setFormAlignment(Qt.AlignCenter)
         self.label = QLabel()
         self.label.setText(self.get_current_weather_text())
+        # self.label.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter )
         self.layout.addRow(self.label)
         self.setLayout(self.layout)
 

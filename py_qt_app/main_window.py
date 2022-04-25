@@ -15,7 +15,7 @@ class MyWindow(QMainWindow):
         pagelayout = QVBoxLayout()
         self.stacklayout = QStackedLayout()
 
-        # Definicja menu
+        # Deklaracja menu
         menu_bar = QMenuBar()
         pagelayout.addWidget(menu_bar)
         
